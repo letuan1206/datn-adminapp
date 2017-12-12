@@ -36,8 +36,8 @@
             return out;
         };
     }
-    AccountCtrl.$inject = ['$scope', '$rootScope', '$http', '$filter', '$window', '$state', 'editableOptions', 'editableThemes'];
-    function AccountCtrl($scope, $rootScope, $http, $filter, $window, $state, editableOptions, editableThemes) {
+    AccountCtrl.$inject = ['$scope', '$rootScope', '$http', '$filter', '$window', '$state', 'editableOptions', 'editableThemes', 'toastr'];
+    function AccountCtrl($scope, $rootScope, $http, $filter, $window, $state, editableOptions, editableThemes, toastr) {
 
         editableOptions.theme = 'bs3';
         editableOptions.icon_set = 'font-awesome';
@@ -62,6 +62,49 @@
                 withCredentials: true
             }).then(function (response) {
                 $scope.member = response.data.data;
+            }, function (err) {
+                $scope.isServerError = false;
+            });
+        }
+
+        $scope.saveUser = function () {
+
+            var url = SERVER_API + 'admin/updateAccount';
+            var dataUpdate = angular.copy($scope.member);
+
+            delete dataUpdate.memb___id;
+            delete dataUpdate.ConnectStat;
+
+            var data = {
+                account: $scope.member.memb___id,
+                dataUpdate: dataUpdate
+            }
+            $http.post(url, data, set_header(), {
+                withCredentials: true
+            }).then(function (response) {
+                $scope.member = response.data.data;
+                toastr.success(response.data.message, {
+                    closeButton: true
+                });
+            }, function (err) {
+                $scope.isServerError = false;
+            });
+
+            console.log($scope.member);
+        };
+
+        $scope.viewWareHouse = function() {
+            var url = SERVER_API + 'admin/getWareHouse';
+
+            var data = {
+                account: $scope.member.memb___id
+            }
+            $http.post(url, data, set_header(), {
+                withCredentials: true
+            }).then(function (response) {
+                console.log(response);
+                $scope.listItem = response.data.data;
+                $('#viewItemWareHouseList').modal('show');
             }, function (err) {
                 $scope.isServerError = false;
             });

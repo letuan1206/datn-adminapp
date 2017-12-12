@@ -405,3 +405,22 @@ h2.box-character-name {
 .chat-avatar {
     padding-top: 5px;
 }
+
+.item-ware-house-list {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height:68px;
+    max-width:68px;
+}
+
+.item-ware-house-style {
+    height: 68px;
+    width: 68px;
+    position: relative;
+    margin: 0 9px 10px 0;
+    float: left;
+}
