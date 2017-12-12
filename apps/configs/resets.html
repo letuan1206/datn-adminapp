@@ -1,0 +1,24 @@
+<div class="box">
+    <div class="box-header">
+        <h2>Column sizing</h2><small>Use bootstrap grid framework to control the input size.</small></div>
+    <div class="box-divider m-a-0"></div>
+    <div class="box-body p-v-md">
+        <div class="row row-sm pt-1">
+            <div class="col-md-3 _600 text-center">GHRS TOP</div>
+            <div class="col-md-4 _600 text-center">RESET MAX TRONG NGÀY</div>
+            <div class="col-md-4 _600 text-center">CÁCH TOP 1 SỐ NGÀY RESET</div>
+            <div class="col-md-1 _600 text-center"></div>
+        </div>
+        <div class="row row-sm pt-1" ng-repeat="item in resets">
+            <div class="col-md-3"><input type="text" class="form-control" ng-model="resets[$index].reset_top" placeholder=".col-xs-3"></div>
+            <div class="col-md-4"><input type="text" class="form-control" ng-model="resets[$index].max_reset_in_day" placeholder=".col-xs-4"></div>
+            <div class="col-md-4"><input type="text" class="form-control" ng-model="resets[$index].distance_top_day_reset" placeholder=".col-xs-5"></div>
+            <div class="col-md-1"><button type="submit" class="btn btn-danger" ng-click="removeRow($index)">Xóa</button></div>
+        </div>
+
+        <div class="p-a text-right">
+            <button type="submit" class="btn btn-fw warn" ng-click="addRow()">Thêm hàng</button>
+            <button type="submit" class="btn btn-info" ng-click="submit()">Cập nhật</button>
+        </div>
+    </div>
+</div>

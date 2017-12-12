@@ -1,0 +1,206 @@
+<div class="box">
+  <div class="box-header">
+    <h2>Quản lý tài khoản</h2>
+  </div>
+  <div class="box-divider m-a-0"></div>
+
+  <div class="box-body">
+    <div class="content-list content-blog-small">
+      <div class="form-group row">
+        <label class="col-sm-3 _600 text-right form-control-label">Tài khoản</label>
+        <div class="col-sm-6">
+          <div class="input-group">
+            <ui-select ng-model="person.selected" theme="bootstrap" on-select="onSelectCallback($item, $model)">
+              <ui-select-match class="ui-select-match" placeholder="Chọn tài khoản">{{$select.selected.memb___id}}</ui-select-match>
+              <ui-select-choices class="ui-select-choices" repeat="item in people | filter: $select.search">
+                <div ng-bind-html="item.memb___id | highlight: $select.search"></div>
+                <small ng-bind-html="item.mail_addr | highlight: $select.search"></small>
+              </ui-select-choices>
+            </ui-select>
+            <span class="input-group-btn">
+                <button ng-click="person.selected = undefined" class="btn white">
+                  <span class="fa fa-remove"></span>
+            </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" ng-if="member">
+  <div class="col-sm-6">
+    <div class="box">
+      <div class="box-header">
+        <h2>Thông tin tài khoản</h2>
+      </div>
+      <div class="box-body">
+        <form editable-form name="editableForm" onaftersave="saveUser()">
+          <div class="form-horizontal">
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label">Pass 1:</label>
+              <div class="col-sm-9">
+                <p class="form-control-static">
+                  <span editable-text="member.memb__pwd">{{ member.memb__pwd || 'empty' }}</span>
+                </p>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label">Pass 2:</label>
+              <div class="col-sm-9">
+                <p class="form-control-static">
+                  <span editable-text="member.pass2">{{ member.pass2 || 'empty' }}</span>
+                </p>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label">Email:</label>
+              <div class="col-sm-9">
+                <p class="form-control-static">
+                  <span editable-text="member.mail_addr">{{ member.mail_addr || 'empty' }}</span>
+                </p>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label">VIP:</label>
+              <div class="col-sm-9">
+                <p class="form-control-static">
+                  <span editable-text="member.SCFIsVip">{{ member.SCFIsVip || 'empty' }}</span>
+                </p>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label">VIP DAYS:</label>
+              <div class="col-sm-9">
+                <p class="form-control-static">
+                  <span editable-text="member.SCFVipDays">{{ member.SCFVipDays || 'empty' }}</span>
+                </p>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label">SĐT:</label>
+              <div class="col-sm-9">
+                <p class="form-control-static">
+                  <span editable-text="member.tel__numb">{{ member.tel__numb || 'empty' }}</span>
+                </p>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label">7 Số bí mật</label>
+              <div class="col-sm-9">
+                <p class="form-control-static">
+                  <span editable-text="member.sno__numb">{{ member.sno__numb || 'empty' }}</span>
+                </p>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label">Status:</label>
+              <div class="col-sm-9">
+                <p class="form-control-static">
+                  <span ng-if="member.ConnectStat == 1">Online</span>
+                  <span ng-if="member.ConnectStat == 0">Offline</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-9 col-sm-offset-3">
+                <button type="button" class="btn white" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+                    Edit
+                  </button>
+                <!-- buttons to submit / cancel form -->
+                <span ng-show="editableForm.$visible">
+                    <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+                      Save
+                    </button>
+                    <button type="button" class="btn white" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+                      Cancel
+                    </button>
+                  </span>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="box">
+      <div class="box-header">
+        <h2>Thông tin ngân hàng</h2>
+      </div>
+      <div class="box-body">
+        <form editable-form name="editableFormBanking" onaftersave="saveUser()">
+          <div class="form-horizontal">
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label">Bạc:</label>
+              <div class="col-sm-9">
+                <p class="form-control-static">
+                  <span editable-text="member.bank_sliver">{{ member.bank_sliver || 'empty' }}</span>
+                </p>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label">Bạc khóa:</label>
+              <div class="col-sm-9">
+                <p class="form-control-static">
+                  <span editable-text="member.bank_sliver_lock">{{ member.bank_sliver_lock || 'empty' }}</span>
+                </p>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label">WCoin:</label>
+              <div class="col-sm-9">
+                <p class="form-control-static">
+                  <span editable-text="member.wcoin">{{ member.wcoin || 'empty' }}</span>
+                </p>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label">Jewel:</label>
+              <div class="col-sm-9">
+                <p class="form-control-static">
+                  <span editable-text="member.bank_jewel">{{ member.bank_jewel || 'empty' }}</span>
+                </p>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label">Jewel khóa:</label>
+              <div class="col-sm-9">
+                <p class="form-control-static">
+                  <span editable-text="member.bank_jewel_lock">{{ member.bank_jewel_lock || 'empty' }}</span>
+                </p>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 form-control-label">Zen:</label>
+              <div class="col-sm-9">
+                <p class="form-control-static">
+                  <span editable-text="member.bank_zen">{{ member.bank_zen || 'empty' }}</span>
+                </p>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-9 col-sm-offset-3">
+                <button type="button" class="btn white" ng-click="editableFormBanking.$show()" ng-show="!editableFormBanking.$visible">
+                    Edit
+                  </button>
+                <!-- buttons to submit / cancel form -->
+                <span ng-show="editableFormBanking.$visible">
+                    <button type="submit" class="btn btn-primary" ng-disabled="editableFormBanking.$waiting">
+                      Save
+                    </button>
+                    <button type="button" class="btn white" ng-disabled="editableFormBanking.$waiting" ng-click="editableFormBanking.$cancel()">
+                      Cancel
+                    </button>
+                  </span>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
