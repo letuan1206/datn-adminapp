@@ -1,30 +1,99 @@
 <div class="row">
-    <div class="col-sm-6 col-md-4 col-lg-3">
+    <div class="col-sm-6 col-md-4 col-lg-4">
         <div class="box p-a">
-            <div class="pull-left m-r"><span class="w-40 success text-center rounded"><i class="material-icons">shopping_basket</i></span></div>
+            <div class="pull-left m-r">
+                <span class="w-40 success text-center rounded">
+                    <i class="material-icons">shopping_basket</i>
+                </span>
+            </div>
             <div class="clear">
-                <h4 class="m-a-0 text-md"><a href="">75 <span class="text-sm">Sales</span></a></h4><small class="text-muted">6 waiting payment.</small></div>
+                <h4 class="m-a-0 text-md">
+                    <a href=""><span class="_600">{{ dashboard.account_total }}</span>
+                        <span class="text-sm">Tài khoản</span>
+                    </a>
+                </h4>
+                <small class="text-muted">{{ dashboard.char_total }} Nhân vật.</small>
+            </div>
         </div>
     </div>
-    <div class="col-sm-6 col-md-4 col-lg-3">
+    <div class="col-sm-6 col-md-4 col-lg-4">
         <div class="box-color p-a blue">
-            <div class="pull-right m-l"><span class="w-40 dker text-center rounded"><i class="material-icons">local_shipping</i></span></div>
+            <div class="pull-right m-l">
+                <span class="w-40 dker text-center rounded">
+                    <i class="material-icons">local_shipping</i>
+                </span>
+            </div>
             <div class="clear">
-                <h4 class="m-a-0 text-md"><a href="">40 <span class="text-sm">Orders</span></a></h4><small class="text-muted">38 Shipped.</small></div>
+                <h4 class="m-a-0 text-md">
+                    <a href=""><span class="_600">{{ dashboard.bank_sliver | number }}</span>
+                        <span class="text-sm">Bạc.</span>
+                    </a>
+                </h4>
+                <small class="text-muted">{{ dashboard.bank_sliver_lock | number }} Bạc khóa.</small>
+            </div>
         </div>
     </div>
-    <div class="col-sm-6 col-md-4 col-lg-3">
+    <div class="col-sm-6 col-md-4 col-lg-4">
         <div class="box p-a">
-            <div class="pull-right m-l"><span class="w-40 info text-center rounded"><i class="material-icons">people</i></span></div>
+            <div class="pull-right m-l">
+                <span class="w-40 info text-center rounded">
+                    <i class="material-icons">people</i>
+                </span>
+            </div>
             <div class="clear">
-                <h4 class="m-a-0 text-md"><a href="">6,000 <span class="text-sm">Members</span></a></h4><small class="text-muted">632 activities post.</small></div>
+                <h4 class="m-a-0 text-md">
+                    <a href=""> <span class="_600">{{ dashboard.card_today || '0' | number}}</span>
+                        <span class="text-sm">Hôm nay.</span>
+                    </a>
+                </h4>
+                <small class="text-muted">{{ dashboard.card_month || '0' | number}} Tháng.</small>
+            </div>
         </div>
     </div>
-    <div class="col-sm-6 col-md-4 col-lg-3">
+    <!-- <div class="col-sm-6 col-md-4 col-lg-3">
         <div class="box-color p-a info">
-            <div class="pull-left m-r"><span class="w-40 dker text-center rounded"><i class="material-icons">comment</i></span></div>
+            <div class="pull-left m-r">
+                <span class="w-40 dker text-center rounded">
+                    <i class="material-icons">comment</i>
+                </span>
+            </div>
             <div class="clear">
-                <h4 class="m-a-0 text-md"><a href="">69 <span class="text-sm">Comments</span></a></h4><small class="text-muted">5 approved.</small></div>
+                <h4 class="m-a-0 text-md">
+                    <a href="">69
+                        <span class="text-sm">Comments</span>
+                    </a>
+                </h4>
+                <small class="text-muted">5 approved.</small>
+            </div>
         </div>
-    </div>
+    </div> -->
+</div>
+
+<div>
+    <table datatable="ng" dt-options="dtOptions" class="row-border hover stripe" id="customers">
+        <thead>
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">Tài khoản</th>
+                <th class="text-center">Nhân vật</th>
+                <th class="text-center">Reset</th>
+                <th class="text-center">Server</th>
+                <th class="text-center">MAP</th>
+                <th class="text-center">IP SV</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in accountList">
+                <td class="text-center">{{ $index + 1 }}</td>
+                <td class="text-center">
+                    <strong>{{ item.memb___id }}</strong>
+                </td>
+                <td class="text-center">{{ item.Name }}</td>
+                <td class="text-center">{{ item.Resets }}</td>
+                <td class="text-center">{{ item.ServerName }}</td>
+                <td class="text-center">{{ item.MapName }} ({{ item.MapPosX }}, {{ item.MapPosY }})</td>
+                <td class="text-center">{{ item.IP }}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

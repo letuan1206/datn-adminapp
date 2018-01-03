@@ -1,0 +1,245 @@
+<div class="box">
+  <div class="box-header">
+    <h2>Quản lý nhân vật</h2>
+  </div>
+  <div class="box-divider m-a-0"></div>
+
+  <div class="box-body">
+    <div class="content-list content-blog-small">
+      <div class="form-group row">
+        <label class="col-sm-3 _600 text-right form-control-label">Nhân vật</label>
+        <div class="col-sm-6">
+          <div class="input-group">
+            <ui-select ng-model="person.selected" theme="bootstrap" on-select="onSelectCallback($item, $model)">
+              <ui-select-match class="ui-select-match" placeholder="Chọn nhhân vật">{{$select.selected.Name}}</ui-select-match>
+              <ui-select-choices class="ui-select-choices" repeat="item in people | filter: $select.search">
+                <div ng-bind-html="item.Name | highlight: $select.search"></div>
+                <!-- <small ng-bind-html="item.AccountID | highlight: $select.search"></small> -->
+              </ui-select-choices>
+            </ui-select>
+            <span class="input-group-btn">
+              <button ng-click="person.selected = undefined" class="btn white">
+                <span class="fa fa-remove"></span>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" ng-if="char">
+  <div class="col-sm-12">
+    <div class="box">
+      <div class="box-header">
+        <h2>Thông tin chi tiết nhân vật</h2>
+      </div>
+      <div class="box-divider m-a-0"></div>
+      <div class="box-body">
+        <form editable-form name="editableForm" onaftersave="saveCharacter()">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-horizontal">
+                <div class="form-group row">
+                  <label class="col-sm-6 form-control-label _600 text-right pt-2">Point dư:</label>
+                  <div class="col-sm-6">
+                    <p class="form-control-static">
+                      <span editable-text="char.LevelUpPoint">{{ char.LevelUpPoint }}</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-6 form-control-label _600 text-right pt-2">Sức mạnh:</label>
+                  <div class="col-sm-6">
+                    <p class="form-control-static">
+                      <span editable-text="char.Strength">{{ char.Strength }}</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-6 form-control-label _600 text-right pt-2">Nhanh nhẹn</label>
+                  <div class="col-sm-6">
+                    <p class="form-control-static">
+                      <span editable-text="char.Dexterity">{{ char.Dexterity }}</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-6 form-control-label _600 text-right pt-2">Sức khỏe:</label>
+                  <div class="col-sm-6">
+                    <p class="form-control-static">
+                      <span editable-text="char.Vitality">{{ char.Vitality}}</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-6 form-control-label _600 text-right pt-2">Năng lượng:</label>
+                  <div class="col-sm-6">
+                    <p class="form-control-static">
+                      <span editable-text="char.Energy">{{ char.Energy }}</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-6 form-control-label _600 text-right pt-2">Mệnh lệnh:</label>
+                  <div class="col-sm-6">
+                    <p class="form-control-static">
+                      <span editable-text="char.Leadership">{{ char.Leadership }}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-horizontal">
+                <div class="form-group row">
+                  <label class="col-sm-6 form-control-label _600 text-right pt-2">Resets:</label>
+                  <div class="col-sm-6">
+                    <p class="form-control-static">
+                      <span editable-text="char.Resets">{{ char.Resets }}</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-6 form-control-label _600 text-right pt-2">Level:</label>
+                  <div class="col-sm-6">
+                    <p class="form-control-static">
+                      <span editable-text="char.cLevel">{{ char.cLevel }}</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-6 form-control-label _600 text-right pt-2">Level Master:</label>
+                  <div class="col-sm-6">
+                    <p class="form-control-static">
+                      <span editable-text="char.SCFMasterLevel">{{ char.SCFMasterLevel }}</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-6 form-control-label _600 text-right pt-2">Point Master:</label>
+                  <div class="col-sm-6">
+                    <p class="form-control-static">
+                      <span editable-text="char.SCFMasterPoints">{{ char.SCFMasterPoints }}</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-6 form-control-label _600 text-right pt-2">Zen:</label>
+                  <div class="col-sm-6">
+                    <p class="form-control-static">
+                      <span editable-text="char.Money">{{ char.Money }}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-sm-4">
+              <div class="form-horizontal">
+                <div class="form-group row">
+                  <label class="col-sm-6 form-control-label _600 text-right pt-2">Class:</label>
+                  <div class="col-sm-6">
+                    <p class="form-control-static">
+                      <span>{{ char.class_name }}</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-6 form-control-label _600 text-right pt-2">Reset ngày:</label>
+                  <div class="col-sm-6">
+                    <p class="form-control-static">
+                      <span>{{ char.Reset_Day }}</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-6 form-control-label _600 text-right pt-2">Top 0h:</label>
+                  <div class="col-sm-6">
+                    <p class="form-control-static">
+                      <span>{{ char.Top_0h }}</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-6 form-control-label _600 text-right pt-2">Status:</label>
+                  <div class="col-sm-6">
+                    <p class="form-control-static">
+                      <span ng-if="char.Online == 0">Offline</span>
+                      <span ng-if="char.Online == 1">Online ({{char.Online_Sub}})</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-6 form-control-label _600 text-right pt-2">Map:</label>
+                  <div class="col-sm-6">
+                    <p class="form-control-static">
+                      <span>{{char.MapName}}  ({{char.MapPosX}}, {{char.MapPosY}})</span>
+                    </p>
+                  </div>
+                </div>
+                
+              </div>
+
+            </div>
+          </div>
+          <div class="form-group row text-center">
+            <div class="col-sm-12 col-sm-offset-3">
+              <button type="button" class="btn white" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+                Edit
+              </button>
+              <!-- buttons to submit / cancel form -->
+              <span ng-show="editableForm.$visible">
+                <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+                  Save
+                </button>
+                <button type="button" class="btn white" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+                  Cancel
+                </button>
+              </span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="viewItemWareHouseList" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header modal-header-custom">
+        <h5 class="modal-title">Danh sách các đồ trong hòm đồ tài khoản {{char.memb___id}}
+        </h5>
+        <div class="bootstrap-dialog-close-button" style="display: block;">
+          <button class="close modal-header-custom" data-dismiss="modal">×</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row m-1">
+          <div ng-repeat="item in listItem">
+            <div class="dker p-a r-3x b-t b-t-primary b-t-2x inline item-info-popover item-ware-house-style" uib-popover-template="'template.html'"
+              popover-trigger="mouseenter" popover-placement="bottom" ng-click="changeSelected($index)">
+              <div>
+                <img ng-src="assets/images/items/{{item.image}}.gif" class="item-ware-house-list">
+                <label style="position: absolute; top: 2px; left: 3px;line-height: normal">
+                  <input type="checkbox" ng-checked="item.selectedItem" class="checkbox-success">
+                </label>
+                <script id="template.html" type="text/ng-template">
+                        <p ng-bind-html="item.info"></p>
+                    </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="text-right">
+          <button class="btn btn-default" data-dismiss="modal">Đóng lại</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

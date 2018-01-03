@@ -2,12 +2,12 @@
     'use strict'
     angular
         .module('app')
-        .controller('ConfigResetCtrl', ConfigResetCtrl);
+        .controller('ConfigResetLimitCtrl', ConfigResetLimitCtrl);
 
-    ConfigResetCtrl.$inject = ['$scope', '$rootScope', '$http', '$filter', '$window', '$state'];
-    function ConfigResetCtrl($scope, $rootScope, $http, $filter, $window, $state) {
+    ConfigResetLimitCtrl.$inject = ['$scope', '$rootScope', '$http', '$filter', '$window', '$state'];
+    function ConfigResetLimitCtrl($scope, $rootScope, $http, $filter, $window, $state) {
 
-        var url = SERVER_API + 'admin/configReset';
+        var url = SERVER_API + 'admin/configLimitReset';
         $http.get(url, set_header(), {
             withCredentials: true
         }).then(function (response) {
@@ -18,16 +18,11 @@
         });
 
         $scope.submit = function () {
-            var url = SERVER_API + 'admin/configReset';
-
-            $scope.resets.forEach(element => {
-                delete element.id;
-            });
+            var url = SERVER_API + 'admin/configLimitReset';
 
             var data = {
                 params: $scope.resets
-            };
-
+            }
             $http.post(url, data, set_header(), {
                 withCredentials: true
             }).then(function (response) {
@@ -44,19 +39,12 @@
 
         $scope.addRow = function () {
             var newRow = {
-                blue_reset: 0,
-                chaos_reset: 0,
-                cre_reset: 0,
-                leadership: 0,
-                level_reset: 0,
-                level_reset_vip: 0,
-                point: 0,
-                point_online: 40,
-                reset: 0,
-                sliver: 0,
-                zen_reset: 0
+                distance_top_day_reset: 0,
+                max_reset_in_day: 0,
+                percent_saturday: "10",
+                percent_sunday: "20",
+                reset_top: 0
             }
-
             $scope.resets.push(newRow);
         }
     }

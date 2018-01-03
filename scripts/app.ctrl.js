@@ -22,7 +22,7 @@
         // checkLogin();
         // config
         vm.app = {
-            name: 'Flatkit',
+            name: 'E-WEB',
             version: '1.2.0',
             // for chart colors
             color: {
@@ -155,9 +155,8 @@
         $scope.logout = function () {
             cfpLoadingBar.start();
             sessionStorage.clear();
-            $rootScope.isLogin = false;
             cfpLoadingBar.complete();
-            $state.go('app.login');
+            $state.go('access.signin');
         }
     }
 })();

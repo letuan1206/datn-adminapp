@@ -5,46 +5,83 @@
 
   <li ui-sref-active="active">
     <a ui-sref="app.dashboard">
-        <span class="nav-icon">
-          <i class="material-icons">&#xe851;
-            <span ui-include="'assets/images/i_0.svg'"></span>
-          </i>
-        </span>
-        <span class="nav-text">Thống kê</span>
-      </a>
+      <span class="nav-icon">
+        <i class="fa fa-dashboard">
+          <span ui-include="'assets/images/i_0.svg'"></span>
+        </i>
+      </span>
+      <span class="nav-text">Thống kê</span>
+    </a>
   </li>
 
-  <li ui-sref-active="active">
-    <a ui-sref="app.config-reset">
-        <span class="nav-icon">
-          <i class="material-icons">&#xe873;
-            <span ui-include="'assets/images/i_0.svg'"></span>
-          </i>
-        </span>
-        <span class="nav-text">Config GHRS</span>
-      </a>
+  <li>
+    <a>
+      <span class="nav-caret">
+        <i class="fa fa-caret-down"></i>
+      </span>
+      <!--<span class="nav-label">-->
+      <!--<b class="label rounded label-sm {{app.setting.theme.warn}}">5</b>-->
+      <!--</span>-->
+      <span class="nav-icon">
+        <i class="fa fa-cogs"></i>
+      </span>
+      <span class="nav-text">Config</span>
+    </a>
+    <ul class="nav-sub">
+      <li ui-sref-active="active">
+        <a ui-sref="app.config-reset">
+          <span class="nav-text">Resets</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.config-limit-reset">
+          <span class="nav-text">Giới hạn RS</span>
+        </a>
+      </li>
+    </ul>
   </li>
 
   <li ui-sref-active="active">
     <a ui-sref="app.account">
-        <span class="nav-icon">
-          <i class="material-icons">&#xe873;
-            <span ui-include="'assets/images/i_0.svg'"></span>
-          </i>
-        </span>
-        <span class="nav-text">Tài khoản</span>
-      </a>
+      <span class="nav-icon">
+        <i class="material-icons">&#xe873;
+          <span ui-include="'assets/images/i_0.svg'"></span>
+        </i>
+      </span>
+      <span class="nav-text">Tài khoản</span>
+    </a>
+  </li>
+
+  <li ui-sref-active="active">
+    <a ui-sref="app.char">
+      <span class="nav-icon">
+        <i class="material-icons">
+        </i>
+      </span>
+      <span class="nav-text">Nhân vật </span>
+    </a>
   </li>
 
   <li ui-sref-active="active">
     <a ui-sref="app.logs">
-        <span class="nav-icon">
-          <i class="material-icons">&#xe873;
-            <span ui-include="'assets/images/i_0.svg'"></span>
-          </i>
-        </span>
-        <span class="nav-text">View Logs</span>
-      </a>
+      <span class="nav-icon">
+        <i class="fa fa-history">
+          <span ui-include="'assets/images/i_0.svg'"></span>
+        </i>
+      </span>
+      <span class="nav-text">View Logs</span>
+    </a>
+  </li>
+
+  <li ui-sref-active="active">
+    <a ui-sref="app.webshop">
+      <span class="nav-icon">
+        <i class="fa fa fa-fw fa-shopping-cart">
+          <span ui-include="'assets/images/i_0.svg'"></span>
+        </i>
+      </span>
+      <span class="nav-text">Web Shop</span>
+    </a>
   </li>
 
   <!--<li ui-sref-active="active">-->

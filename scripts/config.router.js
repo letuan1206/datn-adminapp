@@ -18,13 +18,12 @@
     $rootScope.$stateParams = $stateParams;
 
     $rootScope.$on('$stateChangeSuccess', function (evt, toState, toParams, fromState, fromParams) {
-      // if (toState.name !== 'app.login' && toState.name !== 'app.register' && toState.name !== 'app.forgot-pass') {
-      //   var value = [];
-      //   value.isLogin = sessionStorage.getItem(LOCALSTORAGE_USER) || false;
-      //   if (!value.isLogin) {
-      //     setTimeout(() => { $state.go('app.login') }, 0);
-      //   }
-      // }
+      if (toState.name !== 'access.signin') {
+        var isLogin = sessionStorage.getItem(LOCALSTORAGE_ADMIN) || false;
+        if (!isLogin) {
+          setTimeout(() => { $state.go('access.signin') }, 0);
+        }
+      }
     });
   }
 
@@ -63,6 +62,18 @@
         resolve: load(['ui.bootstrap', 'scripts/controllers/bootstrap.js'])
       })
 
+      .state('access', {
+        url: '/access',
+        template: '<div class="dark bg-auto w-full"><div ui-view class="fade-in-right-big smooth pos-rlt"></div></div>'
+      })
+
+      .state('access.signin', {
+        url: '/signin',
+        templateUrl: 'apps/account/signin.html',
+        controller: "SigninCtrl",
+        resolve: load('apps/account/signin.js')
+      })
+
       .state('app.dashboard', {
         url: '/dashboard',
         templateUrl: 'apps/dashboard/dashboard.html',
@@ -71,12 +82,28 @@
         resolve: load('apps/dashboard/dashboard.js')
       })
 
+      .state('app.webshop', {
+        url: '/webshop',
+        templateUrl: 'apps/webshop/webshop.html',
+        data: { title: 'Dash Board' },
+        controller: "WebShopCtrl",
+        resolve: load('apps/webshop/webshop.js')
+      })
+
       .state('app.account', {
         url: '/account',
         templateUrl: 'apps/account/account.html',
         data: { title: 'Dash Board' },
         controller: "AccountCtrl",
         resolve: load(['ui.select', 'xeditable', 'apps/account/account.js'])
+      })
+
+      .state('app.char', {
+        url: '/char',
+        templateUrl: 'apps/char/char.html',
+        data: { title: 'Dash Board' },
+        controller: "CharacterCtrl",
+        resolve: load(['ui.select', 'xeditable', 'apps/char/char.js'])
       })
 
       .state('app.logs', {
@@ -93,6 +120,14 @@
         data: { title: 'Dash Board' },
         controller: "ConfigResetCtrl",
         resolve: load('apps/configs/resets.js')
+      })
+
+      .state('app.config-limit-reset', {
+        url: '/config-limit-reset',
+        templateUrl: 'apps/configs/limit_reset.html',
+        data: { title: 'Dash Board' },
+        controller: "ConfigResetLimitCtrl",
+        resolve: load('apps/configs/limit_reset.js')
       })
       ;
 

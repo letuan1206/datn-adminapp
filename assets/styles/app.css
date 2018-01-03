@@ -873,8 +873,8 @@ a.list-group-item {
     text-decoration: none; }
   .navbar-brand img,
   .navbar-brand svg {
-    max-height: 24px;
-    vertical-align: -4px;
+    max-height: 35px;
+    vertical-align: -12px;
     display: inline-block; }
   .navbar-brand > span {
     display: inline-block;

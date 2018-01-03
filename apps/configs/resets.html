@@ -1,19 +1,36 @@
 <div class="box">
     <div class="box-header">
-        <h2>Column sizing</h2><small>Use bootstrap grid framework to control the input size.</small></div>
+        <h2>Config Reset</h2>
+    </div>
     <div class="box-divider m-a-0"></div>
     <div class="box-body p-v-md">
         <div class="row row-sm pt-1">
-            <div class="col-md-3 _600 text-center">GHRS TOP</div>
-            <div class="col-md-4 _600 text-center">RESET MAX TRONG NGÀY</div>
-            <div class="col-md-4 _600 text-center">CÁCH TOP 1 SỐ NGÀY RESET</div>
-            <div class="col-md-1 _600 text-center"></div>
+            <div class="col-md-2 _600 text-center">RESET ></div>
+            <div class="col-md-2 _600 text-center">POINT</div>
+            <div class="col-md-2 _600 text-center">BẠC</div>
+            <div class="col-md-2 _600 text-center">ZEN</div>
+            <div class="col-md-2 _600 text-center">MỆNH LỆNH</div>
+            <div class="col-md-2 _600 text-center"></div>
         </div>
         <div class="row row-sm pt-1" ng-repeat="item in resets">
-            <div class="col-md-3"><input type="text" class="form-control" ng-model="resets[$index].reset_top" placeholder=".col-xs-3"></div>
-            <div class="col-md-4"><input type="text" class="form-control" ng-model="resets[$index].max_reset_in_day" placeholder=".col-xs-4"></div>
-            <div class="col-md-4"><input type="text" class="form-control" ng-model="resets[$index].distance_top_day_reset" placeholder=".col-xs-5"></div>
-            <div class="col-md-1"><button type="submit" class="btn btn-danger" ng-click="removeRow($index)">Xóa</button></div>
+            <div class="col-md-2">
+                <input type="text" class="form-control" currency-input="" ng-model="resets[$index].reset" placeholder="Reset >">
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control" currency-input="" ng-model="resets[$index].point" placeholder="Point">
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control" currency-input="" ng-model="resets[$index].sliver" placeholder="Bạc">
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control" currency-input="" ng-model="resets[$index].zen_reset" placeholder="ZEN">
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control" currency-input="" ng-model="resets[$index].leadership" placeholder="Mệnh lệnh">
+            </div>
+            <div class="col-md-2" ng-if="$index !== 0">
+                <button type="submit" class="btn btn-danger" ng-click="removeRow($index)">Xóa</button>
+            </div>
         </div>
 
         <div class="p-a text-right">
